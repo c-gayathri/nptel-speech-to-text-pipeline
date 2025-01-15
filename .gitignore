@@ -1,0 +1,30 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+
+# macOS system files
+.DS_Store
+
+
+trial/
+downloads
