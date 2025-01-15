@@ -205,6 +205,7 @@ class NPTELDownloader:
                 continue
                 
             time.sleep(1)
+        
     
     def download_lecture_files(self) -> None:
         """Download all files from collected download links"""
@@ -213,12 +214,24 @@ class NPTELDownloader:
             
         for filename, url in self.lecture_download_links.items():
             try:
-                session = requests.Session()
-                response = session.get(url, stream=True)
                 
                 filepath = os.path.join(self.download_folder, 'lectures', filename)
+
+                ydl_opts = {
+                    'format': 'bestaudio/best',
+                    'extractaudio': True,  
+                    'audioformat': 'mp3', 
+                    'outtmpl': filepath, 
+                    'postprocessors': [{
+                        'key': 'FFmpegExtractAudio',  # Use FFmpeg to process audio
+                        'preferredcodec': "mp3", 
+                        'preferredquality': '0', 
+                    }],
+                }
+
+                # Download audio
+                yt_dlp.YoutubeDL(ydl_opts).download([url])
                 
-                self._save_file(response, filepath)
                 print(f'Successfully downloaded {filename}')
                 
             except Exception as e:
