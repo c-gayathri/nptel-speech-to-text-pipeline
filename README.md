@@ -119,11 +119,11 @@ python t5_dashboard.py <path_to_jsonl_file>
 python t5_dashboard.py updated_data.jsonl
 ```
 
-The dashboard is hosted locally and can be viewed by following this address: [text](http://127.0.0.1:8050/)
+The dashboard is hosted locally and can be viewed by following this address: [http://127.0.0.1:8050/](http://127.0.0.1:8050/)
 
 ## Data Flow
 
-1. Course materials are downloaded using `t1_downloader.py`.
+1. Course materials are downloaded using `t1_downloader.py` in the folder 'downloads/<course_number>'. The .mp3 lecture audio files are saved in 'downloads/<course_number>/lectures' and the .pdf transcript files are saved in 'downloads/<course_number>/transcripts'.
 2. Audio files are preprocessed using `t2_wav.sh`.
 3. Text is extracted from PDFs using `t3_txt.py`.
 4. A training manifest is generated using `t4_manifest.py`.
