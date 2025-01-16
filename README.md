@@ -126,7 +126,8 @@ The dashboard is hosted locally and can be viewed by following this address: [ht
 1. Course materials are downloaded using `t1_downloader.py` in the folder '<download_dir>'. The .mp3 lecture audio files are saved in '<download_dir>/lectures' and the .pdf transcript files are saved in '<download_dir>/transcripts'.
 2. Audio .mp3 files in '<download_dir>/lectures' are preprocessed using `t2_wav.sh` and are converted into .wav files and stored in '<wav_dir>'.
 3. Text is extracted from PDFs in '<download_dir>/transcripts' using `t3_txt.py` and stored in .txt files in '<txt_dir>'.
-4. A training manifest is generated using `t4_manifest.py`.
+4. A training manifest JSON file is generated using `t4_manifest.py` and stored in '<manifest_file>'.
+    - Input:
 5. Audio statistics are visualized using `t5_dashboard.py`.
 6. JSON files are updated with additional metadata using `t5_json.py`.
 
