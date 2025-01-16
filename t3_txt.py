@@ -54,6 +54,15 @@ def extract_text_from_pdf(pdf_path):
                         # Replace digits by their spoken form
                         line_text = re.sub(r'\b\d+\b', replace_digits_with_words, line_text)
 
+                        ordinal_pattern = r'(\d+)(st|nd|rd|th)'
+    
+                        def convert_match(match):
+                            number = int(match.group(1))
+                            # Use num2words to convert the number to its ordinal word form
+                            return num2words(number, ordinal=True)
+                        
+                        line_text = re.sub(ordinal_pattern, convert_match, line_text)
+
                         #remove punctuation
                         line_text = line_text.translate(str.maketrans("", "", string.punctuation))
 

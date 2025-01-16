@@ -30,3 +30,6 @@ trial/
 downloads
 wav_files
 txtfiles
+wav_files_processed
+wav_files_processed_man
+wav_files_processed_automatic

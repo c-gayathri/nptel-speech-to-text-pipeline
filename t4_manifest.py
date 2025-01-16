@@ -34,11 +34,11 @@ def write_json(audio_dir, text_dir, file_name = "train_manifest.jsonl"):
     manifest_data = []
 
     for audio_file in os.listdir(audio_dir):
-        if not audio_file.endswith(".wav") or not re.match(r"mod(\d+)lec(\d+).wav", audio_file):
+        if not audio_file.endswith(".wav") or not re.search(r"(\d+)(?=\.wav$)", audio_file):
             print("Error: The file " + audio_file + " is not in the desired format")
             continue
 
-        lec_num = int(re.match(r"mod(\d+)lec(\d+).wav", audio_file).group(2))
+        lec_num = int(re.search(r"(\d+)(?=\.wav$)", audio_file).group(1))
         text_file = "lec" + str(lec_num) + ".txt"
         text_filepath = os.path.join(text_dir, text_file)
         transcription = read_txt_file(text_filepath)
