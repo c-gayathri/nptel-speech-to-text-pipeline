@@ -2,7 +2,7 @@
 
 This project provides a comprehensive pipeline for downloading NPTEL (National Programme on Technology Enhanced Learning) course materials, processing audio files, and generating training data for machine learning models.
 
-The pipeline consists of several scripts that work together to download course transcripts and lecture videos, preprocess audio files, extract text from PDFs, generate training manifests, and visualize audio statistics. This toolset is designed for researchers and developers working on speech recognition or natural language processing tasks using NPTEL course data.
+The pipeline consists of several scripts that work together to download course transcripts and lecture videos, preprocess audio files, extract text from PDFs, generate training manifests, and visualize audio statistics. 
 
 ## Repository Structure
 
