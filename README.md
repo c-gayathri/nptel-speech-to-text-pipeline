@@ -119,7 +119,7 @@ python t5_dashboard.py <path_to_jsonl_file>
 python t5_dashboard.py updated_data.jsonl
 ```
 
-The dashboard is hosted locally and can be viewed by following this address: 
+The dashboard is hosted locally and can be viewed by following this address: [text](http://127.0.0.1:8050/)
 
 ## Data Flow
 
