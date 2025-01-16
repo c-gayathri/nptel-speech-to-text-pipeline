@@ -10,6 +10,7 @@ The pipeline consists of several scripts that work together to download course t
 .
 ├── README.md
 ├── t1_downloader.py
+├── t2_process.py
 ├── t2_wav.sh
 ├── t3_txt.py
 ├── t4_manifest.py
@@ -19,12 +20,15 @@ The pipeline consists of several scripts that work together to download course t
 └── updated_data.jsonl
 ```
 
-- `t1_downloader.py`: Downloads course transcripts and lecture videos from NPTEL website.
-- `t2_wav.sh`: Bash script for audio preprocessing with parallelization.
+- `t1_downloader.py`: Downloads course transcripts and lecture audios from NPTEL website.
+- 't2_process.py': Preprocesses audio files to clip segments with music.
+- `t2_wav.sh`: Bash script for audio conversion into .wav with parallelization.
 - `t3_txt.py`: Extracts and processes text from PDF files.
 - `t4_manifest.py`: Generates a training manifest file in JSONL format.
 - `t5_dashboard.py`: Creates a Dash application to visualize audio statistics.
 - `t5_json.py`: Updates JSON files with additional audio metadata.
+- `train_manifest.jsonl`: Contains the manifest data for training.
+- `updated_data.jsonl`: Contains additional metrics that are helpful for visualisation
 
 ## Usage Instructions
 
@@ -177,7 +181,9 @@ It was tested with the following courses and was able to download the mp3 files 
 
 The t2_wav.sh script preprocesses audio files (MP3, WAV, M4A) by converting them to 16kHz mono WAV format using FFmpeg. It processes the files in parallel, optimizing for speed based on the number of CPU cores specified, and handles input validation, error checking, and directory management for efficient batch processing. It automatically searches for any .mp3 and .m4a files in the given directory.
 
-Additionally, the t2_process.py file also clips the music at the start and end of each lecture. It has two modes:
+The last few seconds and the first few seconds in every audio file contains music. This needs to be clipped.
+
+The t2_process.py file clips the music at the start and end of each lecture. It has two modes:
 - This is trigerred when the user passes the clipping times at the start and the end in addition to the input and output directories as arguments. It clips the audio at the start and at the end by the start and end durations specified by the user.
 - This is the default made when the user only passes the input and output directories as arguments. It first segments the audio based on energy thresholding. It then removes the first and the last segments. The threshold is chosen carefully so that it is able to identify the segments of music as accurately as possible.
 
