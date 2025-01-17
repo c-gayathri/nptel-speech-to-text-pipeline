@@ -4,6 +4,7 @@ import soundfile as sf
 import re
 import argparse
 
+# Function for reading the file
 def read_txt_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -14,6 +15,8 @@ def read_txt_file(file_path):
     except Exception as e:
         print(f"Error: {e}")
     
+# Function for getting audio duration from a given file path
+
 def get_audio_duration(file_path):
     try:
         with sf.SoundFile(file_path) as audio:
@@ -21,6 +24,9 @@ def get_audio_duration(file_path):
     except Exception as e:
         print(f"Error: Could not get duration for {file_path} - {e}")  # Detailed error for audio processing
         return None
+
+
+# Function for creating the JSON file in the required format
 
 def write_json(audio_dir, text_dir, file_name = "train_manifest.jsonl"):
 
@@ -33,10 +39,14 @@ def write_json(audio_dir, text_dir, file_name = "train_manifest.jsonl"):
 
     manifest_data = []
 
+    # Iterate through all .wav audio files in the directory
+
     for audio_file in os.listdir(audio_dir):
         if not audio_file.endswith(".wav") or not re.search(r"(\d+)(?=\.wav$)", audio_file):
             print("Error: The file " + audio_file + " is not in the desired format")
             continue
+
+        # Get the required details of the audio and text files
 
         lec_num = int(re.search(r"(\d+)(?=\.wav$)", audio_file).group(1))
         text_file = "lec" + str(lec_num) + ".txt"
@@ -48,6 +58,8 @@ def write_json(audio_dir, text_dir, file_name = "train_manifest.jsonl"):
         audio_filepath = os.path.join(audio_dir,audio_file)
         duration = get_audio_duration(audio_filepath)
 
+        # Create an entry
+
         entry = {
             "audio_filepath": audio_filepath,
             "duration": duration,
@@ -56,6 +68,7 @@ def write_json(audio_dir, text_dir, file_name = "train_manifest.jsonl"):
 
         manifest_data.append(entry)
 
+    # Write the created data into the JSON file
 
     try:
         with open(file_name, "w") as f:
